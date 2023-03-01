@@ -12,4 +12,10 @@ the same hardware.  Hopefully the general trends will remain stable.
 
 ## Manifest
 
-`prefix/` 
+This section describes every top-level directory and its purpose.
+
+* `compilers/`: contains subdirectories for the three compilers used
+for evaluation: MLKit, MLton, and MPL.
+
+* `tarballs/`: contains binary or source tarballs for the three
+  compilers.  Used as intermediary step to populating `compilers/`.
