@@ -14,8 +14,7 @@ the same hardware.  Hopefully the general trends will remain stable.
 
 This section describes every top-level directory and its purpose.
 
-* `compilers/`: contains subdirectories for the three compilers used
-for evaluation: MLKit, MLton, and MPL.
+* `tools/`: Various SML programs that constitute the experimental
+  tooling.
 
-* `tarballs/`: contains binary or source tarballs for the three
-  compilers.  Used as intermediary step to populating `compilers/`.
+* `benchmarks/`: The benchmark programs.
