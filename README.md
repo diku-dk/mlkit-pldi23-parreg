@@ -1,8 +1,6 @@
-# mlkit-pldi23-parreg
+# Artifact for the paper *Artifact for the paper *Parallelism in a Region Inference Context* submitted to PLDI 2023
 
-This is the artifact for the paper *Parallelism in a Region Inference
-Context* submitted to PLDI 2023.  It reproduces Figures 6(a), 6(b) and
-Tables 1 and 2.
+This artifact reproduces Figures 6(a), 6(b) and Tables 1 and 2.
 
 The figures and tables in the paper were computed on an Intel Xeon
 Gold 6230 CPU with 20 cores and hyper-threading disabled.  The precise
