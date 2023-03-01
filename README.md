@@ -19,8 +19,8 @@ available.  The provided Docker container sets all this up for you.
 
 ## Manifest
 
-This section describes every top-level directory or file and its
-purpose.
+This section describes every top-level directory and nontrivial file
+and its purpose.
 
 * `benchmarks/`: The benchmark programs.  You may wish to look at these.
 
@@ -30,3 +30,24 @@ purpose.
 
 * `tools/`: Various SML programs that constitute the experimental
   tooling.  You should not need to look at these.
+
+* `Dockerfile`: The file used to build the Docker image.  You should
+  use the prebuilt image if possible, but if necessary you can build
+  it yourself with the following command:
+
+  ```
+  $ docker build . -t mlkit-pldi23-parreg
+  ```
+
+  (You might need `sudo`, depending on your system.)
+
+  You can then run the built image with:
+
+  ```
+  $ docker run -it mlkit-pldi23-parreg:latest bash
+  ```
+
+  (Again, might need `sudo`.)
+
+  Note that the Dockerfile is *not* reproducible, so it may or may not
+  result in a working image if you try this in the distant future.
