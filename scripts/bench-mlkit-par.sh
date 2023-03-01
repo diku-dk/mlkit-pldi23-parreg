@@ -4,7 +4,7 @@
 
 set -e
 
-source ./config.sh
+. ./config.sh
 
 for c in $(seq $cores); do
     echo "Benchmarking $c cores."
