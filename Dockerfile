@@ -32,3 +32,7 @@ RUN make -C mpl-0.3
 RUN make -C mpl-0.3 install PREFIX=/home/bench/mpl
 RUN rm -rf v0.3.tar.gz mpl-0.3
 ENV PATH=/home/bench/mpl/bin:$PATH
+
+# Prepare artifact
+RUN git clone https://github.com/diku-dk/mlkit-pldi23-parreg.git
+WORKDIR /home/bench/mlkit-pldi23-parreg
