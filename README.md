@@ -1,4 +1,4 @@
-# Artifact for the paper *Artifact for the paper *Parallelism in a Region Inference Context* submitted to PLDI 2023
+# Artifact for the paper *Parallelism in a Region Inference Context* submitted to PLDI 2023
 
 This artifact reproduces Figures 6(a), 6(b) and Tables 1 and 2.
 
