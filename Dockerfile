@@ -2,7 +2,7 @@ FROM debian:latest
 
 # Install tools
 RUN apt-get update
-RUN apt-get install -y sudo git curl make gcc libgmp-dev gnuplot time
+RUN apt-get install -y sudo git curl make gcc libgmp-dev gnuplot-nox time automake
 
 # Set up user
 RUN adduser --gecos '' --disabled-password bench
@@ -17,7 +17,7 @@ RUN make -C mlton-20210117-1.amd64-linux-glibc2.31 install PREFIX=/home/bench/ml
 ENV PATH=/home/bench/mlton/bin:$PATH
 RUN rm -rf mlton-20210117-1.amd64-linux-glibc2.31*
 
-# Install MPL - note that MPL conflicts with MLton so we put it in /opt
+# Install MPL
 RUN curl -L --remote-name https://github.com/MPLLang/mpl/archive/refs/tags/v0.3.tar.gz
 RUN tar xf v0.3.tar.gz
 RUN make -C mpl-0.3
@@ -26,10 +26,13 @@ RUN rm -rf v0.3.tar.gz mpl-0.3
 ENV PATH=/home/bench/mpl/bin:$PATH
 
 # Install MLKit
-RUN curl -L --remote-name https://github.com/melsman/mlkit/releases/download/v4.7.2/mlkit-bin-dist-linux.tgz
-RUN tar xf mlkit-bin-dist-linux.tgz
-RUN make -C mlkit-bin-dist-linux install PREFIX=/home/bench/mlkit
-RUN rm -rf mlkit-bin-dist-linux*
+RUN curl -L --remote-name https://github.com/melsman/mlkit/archive/refs/tags/v4.7.2.tar.gz
+RUN tar xf v4.7.2.tar.gz
+RUN (cd mlkit-4.7.2 && ./autobuild && ./configure --prefix=$HOME/mlkit)
+RUN make -C mlkit-4.7.2 mlkit
+RUN make -C mlkit-4.7.2 mlkit_libs
+RUN make -C mlkit-4.7.2 install
+RUN rm -rf mlkit-4.7.2
 ENV PATH=/home/bench/mlkit/bin:$PATH
 ENV SML_LIB=/home/bench/mlkit/lib/mlkit
 
