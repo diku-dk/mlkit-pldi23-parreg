@@ -7,3 +7,7 @@ all:
 	scripts/compute-speedups.sh
 	scripts/plot-speedups.sh
 	scripts/tables.sh
+
+mlkit-pldi23-parreg.tar.gz: Dockerfile
+	sudo docker build . -t mlkit-pldi23-parreg
+	sudo docker save mlkit-pldi23-parreg:latest | gzip > $@

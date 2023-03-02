@@ -32,23 +32,12 @@ RUN rm -rf v0.3.tar.gz mpl-0.3
 ENV PATH=/home/bench/mpl/bin:$PATH
 
 # Install MLKit
-RUN git clone https://github.com/melsman/mlkit.git
-WORKDIR /home/bench/mlkit
-RUN ./autobuild
-RUN ./configure
-RUN make mlkit
-RUN make mlkit_libs
+ADD --chown=bench https://github.com/melsman/mlkit/releases/download/v4.7.3/mlkit-bin-dist-linux.tgz ./
+RUN tar xf mlkit-bin-dist-linux.tgz
+RUN make -C mlkit-bin-dist-linux install PREFIX=/home/bench/mlkit
+RUN rm -rf mlkit-bin-dist-linux.tgz mlkit-bin-dist-linux
 ENV PATH=/home/bench/mlkit/bin:$PATH
-ENV SML_LIB=/home/bench/mlkit
-# RUN curl -L --remote-name https://github.com/melsman/mlkit/archive/refs/tags/v4.7.2.tar.gz
-# RUN tar xf v4.7.2.tar.gz
-# RUN (cd mlkit-4.7.2 && ./autobuild && ./configure --prefix=$HOME/mlkit)
-# RUN make -C mlkit-4.7.2 mlkit
-# RUN make -C mlkit-4.7.2 mlkit_libs
-# RUN make -C mlkit-4.7.2 install
-# RUN rm -rf mlkit-4.7.2
-#ENV PATH=/home/bench/mlkit/bin:$PATH
-#ENV SML_LIB=/home/bench/mlkit/lib/mlkit
+ENV SML_LIB=/home/bench/mlkit/lib/mlkit
 WORKDIR /home/bench
 
 # Copy artifact files into image.

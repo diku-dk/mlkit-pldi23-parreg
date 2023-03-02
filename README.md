@@ -81,5 +81,8 @@ and its purpose.
 
   This file is what we distribute as the "reproducible" artifact.
 
+  There is also a Makefile target, `make mlkit-pldi23-parreg.tar.gz`,
+  that does the above (with `sudo`).
+
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
