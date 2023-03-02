@@ -18,7 +18,10 @@ although you'll have to get the column headers from the paper.
 The artifact assumes that `mpl`, `mlkit`, and `mlton` are immediately
 runnable from the command line and that necessary environment
 variables have been set for them to work.  Further, `gnuplot` must be
-available.  The provided Docker container sets all this up for you.
+available.  The provided Docker container has all this set up already.
+
+Constructing the image from `Dockerfile` requires access to the
+Internet, but running `make` does not.
 
 ## Manifest
 
@@ -63,6 +66,20 @@ and its purpose.
 
   Note that the Dockerfile is *not* reproducible, so it may or may not
   result in a working image if you try this in the distant future.
+
+  The image can be saved to a file with:
+
+  ```
+  $ docker save mlkit-pldi23-parreg | gzip > mlkit-pldi23-parreg.gz
+  ```
+
+  On another machine, the image can then be loaded from the file:
+
+  ```
+  $ docker load -i mlkit-pldi23-parreg.tar.gz
+  ```
+
+  This file is what we distribute as the "reproducible" artifact.
 
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
