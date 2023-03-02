@@ -9,6 +9,3 @@ mlkit-bench: mlkit-bench.mlb Makefile *.sml
 .PHONY: clean
 clean:
 	rm -rf MLB *~ mlkit-bench smlloc
-	$(MAKE) -C press clean
-	$(MAKE) -C charting clean
-	$(MAKE) -C speedup clean

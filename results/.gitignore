@@ -1,2 +1,3 @@
 # Mostly here to make sure the dir is in Git.
 *.json
+*.speedups

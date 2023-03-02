@@ -17,3 +17,12 @@ benchmarks="benchmarks/sobol/soboloption.mlb \
 cores=4
 
 benchmarks=benchmarks/vpmsort/vpmsort.mlb
+
+export BOLD=$(printf '\e[1m')
+export NC=$(printf '\e[0m')
+
+announce() {
+    echo
+    echo
+    echo "${BOLD}# ${1}${NC}"
+}

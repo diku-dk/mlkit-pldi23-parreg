@@ -1,4 +1,5 @@
 FROM debian:latest
+LABEL description="Artifact for the paper *Parallelism in a Region Inference Context* submitted to PLDI 2023"
 
 # Install tools
 RUN apt-get update
@@ -26,16 +27,28 @@ RUN rm -rf v0.3.tar.gz mpl-0.3
 ENV PATH=/home/bench/mpl/bin:$PATH
 
 # Install MLKit
-RUN curl -L --remote-name https://github.com/melsman/mlkit/archive/refs/tags/v4.7.2.tar.gz
-RUN tar xf v4.7.2.tar.gz
-RUN (cd mlkit-4.7.2 && ./autobuild && ./configure --prefix=$HOME/mlkit)
-RUN make -C mlkit-4.7.2 mlkit
-RUN make -C mlkit-4.7.2 mlkit_libs
-RUN make -C mlkit-4.7.2 install
-RUN rm -rf mlkit-4.7.2
+RUN git clone https://github.com/melsman/mlkit.git
+WORKDIR /home/bench/mlkit
+RUN ./autobuild
+RUN ./configure
+RUN make mlkit
+RUN make mlkit_libs
 ENV PATH=/home/bench/mlkit/bin:$PATH
-ENV SML_LIB=/home/bench/mlkit/lib/mlkit
+ENV SML_LIB=/home/bench/mlkit
+# RUN curl -L --remote-name https://github.com/melsman/mlkit/archive/refs/tags/v4.7.2.tar.gz
+# RUN tar xf v4.7.2.tar.gz
+# RUN (cd mlkit-4.7.2 && ./autobuild && ./configure --prefix=$HOME/mlkit)
+# RUN make -C mlkit-4.7.2 mlkit
+# RUN make -C mlkit-4.7.2 mlkit_libs
+# RUN make -C mlkit-4.7.2 install
+# RUN rm -rf mlkit-4.7.2
+#ENV PATH=/home/bench/mlkit/bin:$PATH
+#ENV SML_LIB=/home/bench/mlkit/lib/mlkit
+WORKDIR /home/bench
 
-# Prepare artifact
-RUN git clone https://github.com/diku-dk/mlkit-pldi23-parreg.git
+# Copy artifact files into image.
+RUN mkdir mlkit-pldi23-parreg
+COPY --chown=bench ./ mlkit-pldi23-parreg/
+
 WORKDIR /home/bench/mlkit-pldi23-parreg
+CMD bash

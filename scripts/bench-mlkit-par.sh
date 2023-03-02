@@ -7,7 +7,7 @@ set -e
 . ./config.sh
 
 for c in $(seq $cores); do
-    echo "Benchmarking $c cores."
+    announce "Benchmarking MLKit with $c threads."
     restrict() {
         taskset -c 0-$((c-1)) "$@"
     }
