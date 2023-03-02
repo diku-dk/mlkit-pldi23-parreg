@@ -14,9 +14,7 @@ benchmarks="benchmarks/sobol/soboloption.mlb \
  benchmarks/nqueens/nqueens.mlb"
 
 # Compute speedup from 1 up to this number of cores.
-cores=4
-
-benchmarks=benchmarks/vpmsort/vpmsort.mlb
+cores=20
 
 export BOLD=$(printf '\e[1m')
 export NC=$(printf '\e[0m')
