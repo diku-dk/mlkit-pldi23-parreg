@@ -1,9 +1,14 @@
-FROM debian:latest
+FROM debian:bullseye-slim
 LABEL description="Artifact for the paper *Parallelism in a Region Inference Context* submitted to PLDI 2023"
 
 # Install tools
 RUN apt-get update
-RUN apt-get install -y sudo git curl make gcc libgmp-dev gnuplot-nox time automake
+RUN apt-get install -y sudo make gcc libgmp-dev gnuplot-nox time automake patch git
+
+# Clean up image.
+RUN apt-get clean autoclean
+RUN apt-get autoremove --yes
+RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Set up user
 RUN adduser --gecos '' --disabled-password bench
@@ -12,14 +17,14 @@ USER bench
 WORKDIR /home/bench/
 
 # Install MLton
-RUN curl -L --remote-name https://github.com/MLton/mlton/releases/download/on-20210117-release/mlton-20210117-1.amd64-linux-glibc2.31.tgz
+ADD --chown=bench https://github.com/MLton/mlton/releases/download/on-20210117-release/mlton-20210117-1.amd64-linux-glibc2.31.tgz ./
 RUN tar xf mlton-20210117-1.amd64-linux-glibc2.31.tgz
 RUN make -C mlton-20210117-1.amd64-linux-glibc2.31 install PREFIX=/home/bench/mlton
 ENV PATH=/home/bench/mlton/bin:$PATH
 RUN rm -rf mlton-20210117-1.amd64-linux-glibc2.31*
 
 # Install MPL
-RUN curl -L --remote-name https://github.com/MPLLang/mpl/archive/refs/tags/v0.3.tar.gz
+ADD --chown=bench https://github.com/MPLLang/mpl/archive/refs/tags/v0.3.tar.gz ./
 RUN tar xf v0.3.tar.gz
 RUN make -C mpl-0.3
 RUN make -C mpl-0.3 install PREFIX=/home/bench/mpl
