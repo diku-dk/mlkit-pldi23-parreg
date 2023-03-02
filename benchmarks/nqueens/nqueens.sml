@@ -24,14 +24,14 @@ fun countSol n =
     fun search i b =
       if i >= n then 1 else
       let
-        fun tryCol j =
-          if threatened (i, j, b) then 0 else search (i+1) ((i,j)::(*copy*) b)
+        fun tryCol b j =
+          if threatened (i, j, b) then 0 else search (i+1) ((i,j)::b)
       in
         if i >= D then
           (* if we're already a few levels deep, then just go sequential *)
-          Seq.iterate op+ 0 (Seq.tabulate tryCol n)
+          Seq.iterate op+ 0 (Seq.tabulate (tryCol b) n)
         else
-          Seq.reduce op+ 0 (Seq.tabulate tryCol n)
+          Seq.reduce op+ 0 (Seq.tabulate (tryCol (copy b)) n)
       end
   in
     search 0 []
