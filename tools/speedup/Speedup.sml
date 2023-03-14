@@ -96,7 +96,7 @@ fun main (progname, args) =
                    List.map (fn (n,f) => (n, getLines (FileUtil.readFile f))) (rev jsons)
                val baselines = getLines (FileUtil.readFile baseline)
                val benchName = OS.Path.base o OS.Path.file
-               val benchmarks = sortBenchmarks benchmarks baselines measurements
+               (* val benchmarks = sortBenchmarks benchmarks baselines measurements *)
            in print(String.concatWith " " ("n" :: map benchName benchmarks) ^ "\n");
               print(String.concat (map (process benchmarks baselines) measurements));
 	      OS.Process.success
