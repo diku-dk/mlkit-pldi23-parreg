@@ -1,6 +1,7 @@
 set xlabel 'Cores'
 set ylabel 'Speedup'
-set key above horizontal
+set tmargin 4.5
+set key at 25,25.5 maxrows 4
 set datafile separator " "
 set style function linespoints
 set y2tics 1,2
