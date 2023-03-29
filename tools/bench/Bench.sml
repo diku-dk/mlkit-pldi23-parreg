@@ -318,13 +318,15 @@ fun main (progname, args) =
 		       ; print ("Wrote file ``" ^ s ^ "''\n"))
 		      handle ? => (TextIO.closeOut os; raise ?)
 		   end
-               val () = if errs = 0 then
-                          print "Success: there were no errors.\n"
-                        else print ("*** WARNING: there " ^
-                                    (if errs = 1 then "was one error.\n"
-                                     else "were " ^ Int.toString errs ^ " errors.\n"))
+               val res = if errs = 0 then
+                             (print "Success: there were no errors.\n";
+                              OS.Process.success)
+                        else (print ("*** WARNING: there " ^
+                                     (if errs = 1 then "was one error.\n"
+                                      else "were " ^ Int.toString errs ^ " errors.\n"));
+                              OS.Process.failure)
 	   in withFile out (fn os => TextIO.output(os, Json.toString (toJson ts)))
-	    ; OS.Process.success
+	    ; res
 	   end
     end
 end
