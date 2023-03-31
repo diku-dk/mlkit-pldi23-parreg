@@ -74,6 +74,29 @@ out of the image for inspection on the host system.  Consult
 your favourite search engine for information on how to use
 Docker if you are unfamiliar.
 
+## Adding a new benchmark
+
+This artifact is not intended as an extensible benchmarking framework,
+but it is not too onerous to add new benchmarks.
+
+A benchmark is presented by an
+[.mlb](http://mlton.org/MLBasisExamples) file that describes the
+source files of the benchmark.  Our convention is further that each
+benchmark is stored in a subfolder in `benchmarks/`.  The list of
+benchmarks being used is listed in [config.sh](config.sh), and you
+need to modify this file when you add or remove a benchmark.
+
+A benchmark program must invoke the `Timing.run` when starting.  This
+provides the necessary command line options and performs timing.
+
+The easiest way to add a new benchmark is to copy
+[benchmarks/fib](benchmarks/fib), give it a new name, add it to
+`config.sh`, and then modify its implementation.  Benchmarks are
+responsible for doing their own validation through the `Timing.run`
+function.  The timing methodology employed is somewhat crude, so to
+avoid too much noise, adjust the default workload so the benchmark
+takes at least a second to run on a single core.
+
 ## Manifest
 
 This section describes every top-level directory and nontrivial file
