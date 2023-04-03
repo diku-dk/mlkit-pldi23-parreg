@@ -53,6 +53,9 @@ speed.  You can lower the number of cores in `config.sh` to speed up
 the process.  This is particularly useful if your machine has fewer
 than 20 cores anyway.
 
+The Docker image also contains a tarball `/home/bench/v4.7.3.tar.gz`
+that contains the MLKit 4.7.3 source code for reference.
+
 ### System Requirements
 
 The experimental infrastructure assumes that `mpl`, `mlkit`,
@@ -66,13 +69,12 @@ that Docker on macOS may have a lower default limit than this.
 
 ### Docker Image
 
-For space reasons, the Docker image is very sparse and does not
-have e.g. text editors installed.  The user account has
-passwordless `sudo` so you can install more things if you want.
-Otherwise you can use commands such as `docker cp` to move data
-out of the image for inspection on the host system.  Consult
-your favourite search engine for information on how to use
-Docker if you are unfamiliar.
+For space reasons, the Docker image is sparse and does not have
+e.g. text editors installed.  The user account has passwordless `sudo`
+so you can install more things if you want.  Otherwise you can use
+commands such as `docker cp` to move data out of the image for
+inspection on the host system.  Consult your favourite search engine
+for information on how to use Docker if you are unfamiliar.
 
 ## Adding a new benchmark
 

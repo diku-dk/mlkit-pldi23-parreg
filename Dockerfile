@@ -31,6 +31,9 @@ RUN make -C mpl-0.3 install PREFIX=/home/bench/mpl
 RUN rm -rf v0.3.tar.gz mpl-0.3
 ENV PATH=/home/bench/mpl/bin:$PATH
 
+# Download MLKit source for reference
+ADD --chown=bench https://github.com/melsman/mlkit/archive/refs/tags/v4.7.3.tar.gz ./
+
 # Install MLKit
 ADD --chown=bench https://github.com/melsman/mlkit/releases/download/v4.7.3/mlkit-bin-dist-linux.tgz ./
 RUN tar xf mlkit-bin-dist-linux.tgz
@@ -38,7 +41,6 @@ RUN make -C mlkit-bin-dist-linux install PREFIX=/home/bench/mlkit
 RUN rm -rf mlkit-bin-dist-linux.tgz mlkit-bin-dist-linux
 ENV PATH=/home/bench/mlkit/bin:$PATH
 ENV SML_LIB=/home/bench/mlkit/lib/mlkit
-WORKDIR /home/bench
 
 # Copy artifact files into image.
 RUN mkdir mlkit-pldi23-parreg
