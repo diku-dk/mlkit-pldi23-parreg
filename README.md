@@ -131,5 +131,3 @@ and its purpose.
 
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
-
-* `v4.7.3.tar.gz`: MLKit 4.7.3 source code for reference.
