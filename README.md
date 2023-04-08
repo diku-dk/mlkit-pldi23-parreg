@@ -50,8 +50,8 @@ although you'll have to get the column headers from the paper.
 
 It takes about five hours to run all benchmarks, depending on machine
 speed.  You can lower the number of cores in `config.sh` to speed up
-the process.  This is particularly useful if your machine has fewer
-than 20 cores anyway.
+the process.  Such a modification is particularly useful if your
+machine has fewer than 20 cores anyway.
 
 The Docker image also contains a tarball `/home/bench/v4.7.3.tar.gz`
 that contains the MLKit 4.7.3 source code for reference.
@@ -61,7 +61,7 @@ that contains the MLKit 4.7.3 source code for reference.
 The experimental infrastructure assumes that `mpl`, `mlkit`,
 and `mlton` are immediately runnable from the command line and
 that necessary environment variables have been set for them to
-work.  Further, `gnuplot` must available.  The provided Docker
+work.  Further, `gnuplot` must be available.  The provided Docker
 image has all this set up already.
 
 You must have 16GiB of memory to run the benchmarks.  We have noticed
@@ -88,8 +88,9 @@ benchmark is stored in a subfolder in `benchmarks/`.  The list of
 benchmarks being used is listed in [config.sh](config.sh), and you
 need to modify this file when you add or remove a benchmark.
 
-A benchmark program must invoke the `Timing.run` when starting.  This
-provides the necessary command line options and performs timing.
+A benchmark program must invoke the function `Timing.run` when
+starting.  This function provides the necessary command line options
+and performs timing.
 
 The easiest way to add a new benchmark is to copy
 [benchmarks/fib](benchmarks/fib), give it a new name, add it to
@@ -130,3 +131,5 @@ and its purpose.
 
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
+
+* `v4.7.3.tar.gz`: MLKit 4.7.3 source code for reference.

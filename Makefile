@@ -1,3 +1,4 @@
+.PHONY: all
 all:
 	make -C tools
 	scripts/bench-mlkit-seq.sh
@@ -11,3 +12,8 @@ all:
 mlkit-pldi23-parreg.tar.gz: Dockerfile
 	sudo docker build . -t mlkit-pldi23-parreg
 	sudo docker save mlkit-pldi23-parreg:latest | gzip > $@
+
+.PHONY: clean
+clean:
+	rm -rf *~ mlkit-pldi23-parreg.tar.gz
+	make -C tools clean
